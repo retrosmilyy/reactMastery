@@ -1,12 +1,19 @@
 import BookShow from "./BookShow";
+import BooksContext from "../context/books";
+import { useContext } from "react";
 
-function BookList({ books, onDelete, onEdit }) {
-  //how mapping is done in order list items red
+function BookList() {
+  const { books } = useContext(BooksContext);
+
+  //how mapping is done in order list items 
   const renderedBooks = books.map((book) => {
-    return <BookShow onEdit={onEdit} onDelete={onDelete} key={book.id} book={book} />;
+    return (
+
+      <BookShow key={book.id} book={book} />
+    );
   });
 
   return <div className="book-list">{renderedBooks}</div>;
 }
 
-export default BookList;
+export default BookList; 
