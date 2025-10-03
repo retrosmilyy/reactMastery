@@ -1,0 +1,46 @@
+import { useState } from "react";
+import { GoChevronDown, GoChevronLeft } from "react-icons/go";
+
+function Accordion({ items }) {
+  const [expandedIndex, setExpandedIndex] = useState(-1);
+
+  const handleClick = (nextIndex) => {
+    // console.log('STALE version of extendedIndex', expandedIndex);
+    setExpandedIndex((currentExpandedIndex) => {
+      // console.log('UP TO DATE version', currentExpandedIndex);
+      if (currentExpandedIndex === nextIndex) {
+        return -1;
+      } else {
+        return nextIndex;
+      }
+    });
+  };
+
+  const renderedItems = items.map((item, index) => {
+    const isExtended = index === expandedIndex;
+
+    //using the && gives back the first falsey value or the last truthy value red
+    // const content = isExtented && <div>{item.content}</div>;
+    const icon = (
+      <span className="text-2xl">
+        {isExtended ? <GoChevronDown /> : <GoChevronLeft />}
+      </span>
+    );
+    return (
+      <div key={item.id}>
+        <div
+          className="flex justify-between p-3 bg-gray-50 border-b items-center cursor-pointer"
+          onClick={() => handleClick(index)}
+        >
+          {item.label}
+          {icon}
+        </div>
+        {isExtended && <div className="border-b p-5">{item.content}</div>}
+      </div>
+    );
+  });
+
+  return <div className="border-x border-t rounded">{renderedItems}</div>;
+}
+
+export default Accordion;
