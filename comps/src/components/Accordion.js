@@ -4,10 +4,8 @@ import { GoChevronDown, GoChevronLeft } from "react-icons/go";
 function Accordion({ items }) {
   const [expandedIndex, setExpandedIndex] = useState(-1);
 
-  const handleClick = (nextIndex) => {
-    // console.log('STALE version of extendedIndex', expandedIndex);
+  const handleClick = (nextIndex) => {   
     setExpandedIndex((currentExpandedIndex) => {
-      // console.log('UP TO DATE version', currentExpandedIndex);
       if (currentExpandedIndex === nextIndex) {
         return -1;
       } else {
